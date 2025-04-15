@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import './UserManage.scss';
-import { getAllUsers } from '../../services/userService';
+import { getAllUsers, createNewUserService } from '../../services/userService';
 import ModelUser from './ModelUser';
 
 class UserManage extends Component {
@@ -16,6 +16,10 @@ class UserManage extends Component {
     }
 
     async componentDidMount() {
+        await this.getAllUsersFromReact();
+    }
+
+    getAllUsersFromReact = async () => {
         let response = await getAllUsers('ALL')
         if (response && response.errCode === 0) {
             this.setState({
@@ -37,6 +41,23 @@ class UserManage extends Component {
         })
     }
 
+    createNewuser = async (data) => {
+        try {
+            let response = await createNewUserService(data);
+            if (response && response.errCode !== 0) {
+                alert(response.errMessage)
+
+            } else {
+                await this.getAllUsersFromReact();
+                this.setState({
+                    isOpenModalUser: false
+                })
+            }
+        } catch (e) {
+            console.log(e)
+        }
+        console.log('check data from child: ', data)
+    }
 
     render() {
         let arrUsers = this.state.arrUsers;
@@ -47,7 +68,7 @@ class UserManage extends Component {
 
                     isOpen={this.state.isOpenModalUser}
                     toggleFromParent={this.toggleUserModal}
-                    text={'abc'}
+                    createNewuser={this.createNewuser}
 
                 />
                 <div className='title text-center'>Manage Users</div>
