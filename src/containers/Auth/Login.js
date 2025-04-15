@@ -34,18 +34,18 @@ class Login extends Component {
         this.setState({
             errMessage: ''
         })
-        try{
+        try {
             let data = await handleLoginApi(this.state.username, this.state.password);
-            if (data && data.errCode !== 0){
+            if (data && data.errCode !== 0) {
                 this.setState({
                     errMessage: data.message
                 })
             }
-            if (data && data.errCode === 0){
+            if (data && data.errCode === 0) {
                 this.props.userLoginSuccess(data.user)
                 console.log('login succeeds')
             }
-        }catch(error){
+        } catch (error) {
             if (error.response) {
                 if (error.response.data) {
                     this.setState({
@@ -71,32 +71,32 @@ class Login extends Component {
                         <div className="col-12 text-login">Login</div>
                         <div className="col-12 form-group login-input">
                             <label>Username:</label>
-                            <input type="text" 
-                            className="form-control" 
-                            placeholder='Enter your username'
-                            value={this.state.username}
-                            onChange={(event) => {this.handOnChangeUsername(event)}}></input>
+                            <input type="text"
+                                className="form-control"
+                                placeholder='Enter your username'
+                                value={this.state.username}
+                                onChange={(event) => { this.handOnChangeUsername(event) }}></input>
                         </div>
                         <div className="col-12 form-group login-input">
                             <label>Password:</label>
                             <div className="custome-input-password">
-                                <input 
+                                <input
                                     type={this.state.isShowPassword ? 'text' : 'password'}
-                                    className="form-control"  
+                                    className="form-control"
                                     placeholder='Enter your password'
-                                    onChange={(event) => {this.handOnChangePassword(event)}}></input>
+                                    onChange={(event) => { this.handOnChangePassword(event) }}></input>
                                 <span
-                                    onClick={() => {this.handleShowHidePassword()}}
+                                    onClick={() => { this.handleShowHidePassword() }}
 
-                                ><i class={this.state.isShowPassword ? 'far fa-eye' : 'far fa-eye-slash'}></i>
+                                ><i className={this.state.isShowPassword ? 'far fa-eye' : 'far fa-eye-slash'}></i>
                                 </span>
                             </div>
                         </div>
-                        <div className='col-12' style={{ color: 'red'}}>
+                        <div className='col-12' style={{ color: 'red' }}>
                             {this.state.errMessage}
                         </div>
                         <div className="col-12">
-                            <button className='btn-login' onClick={()=> {this.handleLogin()}}>Login</button>
+                            <button className='btn-login' onClick={() => { this.handleLogin() }}>Login</button>
                         </div>
                         <div className="col-12">
                             <span className='forgot-password'>Forgot your password?</span>
