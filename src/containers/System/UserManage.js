@@ -3,12 +3,15 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import './UserManage.scss';
 import {getAllUsers} from '../../services/userService';
+import ModelUser from './ModelUser';
+
 class UserManage extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            arrUser: []
+            arrUser: [],
+            isOpenModalUser: false,
         }
     }
 
@@ -22,12 +25,40 @@ class UserManage extends Component {
     }
 
 
+    handleAddNewUser = () => {
+        this.setState({
+            isOpenModalUser: true,
+        })
+    }
+
+    toggleUserModal = () => {
+        this.setState({
+            isOpenModalUser: !this.state.isOpenModalUser,
+        })
+    }
+
+
     render() {
-        console.log('check render', this.state)
         let arrUsers = this.state.arrUsers;
+        console.log(arrUsers)
         return (
             <div className="users-container">
+                <ModelUser
+                
+                    isOpen = {this.state.isOpenModalUser}
+                    toggleFromParent = {this.toggleUserModal}
+                    text = {'abc'}
+                
+                />
                 <div className='title text-center'>Manage Users</div>
+
+                <div className='mx-1'>
+                    <button 
+                    className='btn btn-primary px-3'
+                    onClick={()=>this.handleAddNewUser()}
+                    ><i className='fas fa-plus'></i>Add New User</button>
+                </div>
+
                 <div className='users-table mt-3 mx-1'>
                     <table id="customers">
                         <tr>
@@ -39,7 +70,6 @@ class UserManage extends Component {
                         </tr>
                         
                             {arrUsers && arrUsers.map((item, index) => {
-                                console.log('Check Map', item, index)
                                 return (
                                     <tr>
                                         <td>{item.email}</td>
