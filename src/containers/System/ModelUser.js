@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label, Form, FormGroup } from 'reactstrap';
+import { emitter } from "../../utils/emitter"
+
 class ModalUser extends Component {
 
     constructor(props) {
@@ -15,9 +17,25 @@ class ModalUser extends Component {
             address: ''
 
         }
+
+
+        this.listenToEmitter();
+    }
+
+    listenToEmitter() {
+        emitter.on('EVENT_CLEAR_MODAL_DATA', data => {
+            this.setState({
+                email: '',
+                password: '',
+                firstName: '',
+                lastName: '',
+                address: ''
+            })
+        })
     }
 
     componentDidMount() {
+        console.log('mounting modal')
     }
 
     toggle = () => {
@@ -59,7 +77,7 @@ class ModalUser extends Component {
         let isValid = this.checkValideInput();
         if (isValid === true) {
             console.log('check props child', this.props)
-            this.props.createNewuser(this.state);
+            this.props.createNewuser(this.state, 'abc');
         }
     }
 
