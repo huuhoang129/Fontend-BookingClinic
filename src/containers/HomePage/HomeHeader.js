@@ -61,7 +61,7 @@ class HomeHeader extends Component {
                                 <div className='text-child'>Khám tổng quát</div>
                             </div>
                             <div className='option-child'>
-                                <div className='icon-child'><i className='fas fa-microscope'></i></div>
+                                <div className='icon-child'><i className='fas fa-flask'></i></div>
                                 <div className='text-child'>Xét nghiệm y khoa</div>
                             </div>
                             <div className='option-child'>
@@ -69,7 +69,7 @@ class HomeHeader extends Component {
                                 <div className='text-child'>Sức khỏe tinh thần</div>
                             </div>
                             <div className='option-child'>
-                                <div className='icon-child'><i className='fas fa-user-md'></i></div>
+                                <div className='icon-child'><i className='fas fa-briefcase-medical'></i></div>
                                 <div className='text-child'>Khám nha khoa</div>
                             </div>
                         </div>
