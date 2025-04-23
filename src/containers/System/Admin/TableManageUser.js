@@ -9,6 +9,7 @@ import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
 // import style manually
 import 'react-markdown-editor-lite/lib/index.css';
+import UserRedux from './UserRedux';
 
 // Register plugins if required
 // MdEditor.use(YOUR_PLUGINS_HERE);
@@ -26,7 +27,7 @@ class TableManageUser extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            usersRedux: []
         }
     }
 
@@ -51,8 +52,6 @@ class TableManageUser extends Component {
     }
 
     render() {
-        console.log('check all user', this.props.listUsers)
-        console.log('check state', this.state.usersRedux)
         let arrUsers = this.state.usersRedux;
         return (
             <React.Fragment>
