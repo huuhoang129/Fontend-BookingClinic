@@ -222,7 +222,7 @@ class UserRedux extends Component {
                             <div className='col-12 my-3'>{isGetGenders === true ? 'Loading genders' : ''}</div>
                             <div className='col-3 mb-2  '>
                                 <label><FormattedMessage id="manage-user.email" /></label>
-                                <input className="form-control" type='email'
+                                <input className="form-control" type='email' autoComplete="off"
                                     value={email}
                                     onChange={(event) => { this.onChangeInput(event, 'email') }}
                                     disabled={this.state.action === CRUD_ACTIONS.EDIT ? true : false}
@@ -230,7 +230,7 @@ class UserRedux extends Component {
                             </div>
                             <div className='col-3'>
                                 <label><FormattedMessage id="manage-user.password" /></label>
-                                <input className="form-control" type='password'
+                                <input className="form-control" type='password' autoComplete="new-password"
                                     value={password}
                                     onChange={(event) => { this.onChangeInput(event, 'password') }}
                                     disabled={this.state.action === CRUD_ACTIONS.EDIT ? true : false}
