@@ -5,8 +5,6 @@ import Slider from 'react-slick';
 import * as actions from '../../../store/actions'
 import { LANGUAGES } from '../../../utils';
 import { withRouter } from 'react-router';
-import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
-
 
 class OutStandingDoctor extends Component {
 
@@ -30,8 +28,9 @@ class OutStandingDoctor extends Component {
     }
 
     handleViewDetailDoctor = (doctor) => {
-        console.log('view info', doctor)
-        this.props.history.push(`/detail-doctor/${doctor.id}`)
+        if (this.props.history) {
+            this.props.history.push(`/detail-doctor/${doctor.id}`)
+        }
 
     }
     render() {
