@@ -9,6 +9,7 @@ import moment from 'moment';
 import './ManageSchedule.scss'
 import { toast } from 'react-toastify';
 import _ from 'lodash';
+import { saveBulkScheduleDoctor } from '../../../services/userService';
 
 class ManageSchedule extends Component {
     constructor(props) {
@@ -93,7 +94,7 @@ class ManageSchedule extends Component {
         }
     }
 
-    handleSaveSchedule = () => {
+    handleSaveSchedule = async () => {
         let { rangeTime, selectedDoctor, currentDate } = this.state;
         let result = [];
         if (!currentDate) {
@@ -104,7 +105,10 @@ class ManageSchedule extends Component {
             toast.error("Invalid Schedule!")
             return;
         }
-        let formatedDate = moment(currentDate).format(dateFormat.SEND_TO_SERVER);
+
+        // let formattedDate = moment(currentDate).format(dateFormat.SEND_TO_SERVER);
+        // let formattedDate = moment(currentDate).unix();
+        let formattedDate = new Date(currentDate).getTime();
         if (rangeTime && rangeTime.length) {
             let selectTime = rangeTime.filter(item => item.isSelected === true)
             if (selectTime && selectTime.length > 0) {
@@ -112,8 +116,8 @@ class ManageSchedule extends Component {
                     console.log('check schedule', schedule, index, selectedDoctor)
                     let object = {};
                     object.doctorId = selectedDoctor.value;
-                    object.date = formatedDate;
-                    object.time = schedule.keyMap;
+                    object.date = formattedDate;
+                    object.timeType = schedule.keyMap;
                     result.push(object);
                 })
             } else {
@@ -121,8 +125,13 @@ class ManageSchedule extends Component {
                 return;
             }
         }
-        console.log('chekc result', result)
-
+        let res = await saveBulkScheduleDoctor({
+            arrSchedule: result,
+            doctorId: selectedDoctor.value,
+            formattedDate: formattedDate
+        })
+        console.log('check res', res)
+        console.log('check result', result)
 
     }
 
