@@ -72,7 +72,7 @@
         "detail-doctor":{
             "schedule": "Schedule",
             "no-schedule": "There is no appointment during this time, please select another time!",
-            "choose": "Choose",
+            "choose": "Choose ",
             "book-free": " and book (free)"
         }
     }

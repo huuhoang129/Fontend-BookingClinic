@@ -74,7 +74,7 @@
         "detail-doctor":{
             "schedule": "Lịch khám",
             "no-schedule": "Không có lịch hẹn trong thời gian này, vui lòng chọn thời gian khác!",
-            "choose": "Chọn",
+            "choose": "Chọn ",
             "book-free": " và đặt (miễn phí)"
         }
     }
