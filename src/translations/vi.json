@@ -77,5 +77,14 @@
             "choose": "Chọn ",
             "book-free": " và đặt (miễn phí)"
         }
+    },
+    "admin":{
+        "manage-doctor":{
+            "title": "Tạo thêm thông tin bác sĩ",
+            "select-doctor": "Chọn bác sĩ",
+            "intro": "Thông tin giới thiệu",
+            "read": "Lưu thông tin",
+            "create": "Tạo thông tin"
+        }
     }
 }
