@@ -5,11 +5,12 @@
         display: flex;
 
         .content-left {
-            background     : center center no-repeat;
-            background-size: cover;
-            width          : 80px;
-            height         : 80px;
-            border-radius  : 50%;
+            background-repeat  : center;
+            background-position: center;
+            background-size    : cover;
+            width              : 80px;
+            height             : 80px;
+            border-radius      : 50%;
         }
 
         .content-right {
