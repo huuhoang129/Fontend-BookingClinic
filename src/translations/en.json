@@ -60,7 +60,8 @@
     },
     "homepage": {
         "outstading-doctor": "Outstanding doctor of the week",
-        "more-info": "See more"
+        "more-info": "See more",
+        "speciality-poplular": "Poplular Specialist"
     },
     "manage-schedule": {
         "title": "Manage Doctor's Examination Plan",
