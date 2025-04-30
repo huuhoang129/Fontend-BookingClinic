@@ -14,6 +14,7 @@ import './ManageDoctor.scss'
 import Select from 'react-select';
 import { CRUD_ACTIONS, LANGUAGES } from '../../../utils';
 import { getDetailInforDoctor } from "../../../services/userService"
+import { selectFilter } from 'react-bootstrap-table2-filter';
 
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
@@ -36,12 +37,20 @@ class TableManageUser extends Component {
             listPrice: [],
             listPayment: [],
             listProvince: [],
+            listClinic: [],
+            listSpecialty: [],
+
             selectedPrice: '',
             selectedPayment: '',
             selectedProvince: '',
+            selectedClinic: '',
+            selectedSpecialty: '',
+
             nameClinic: '',
             addressClinic: '',
-            note: ''
+            note: '',
+            clinicId: '',
+            specialtyId: ''
         }
     }
 
@@ -88,6 +97,15 @@ class TableManageUser extends Component {
                 })
             }
 
+            if (type === 'SPECIALTY') {
+                inputData.map((item, index) => {
+                    let object = {};
+                    object.label = item.name;
+                    object.value = item.id;
+                    result.push(object)
+                })
+            }
+
         }
         return result
     }
@@ -101,16 +119,18 @@ class TableManageUser extends Component {
         }
 
         if (prevProps.allRequiredDoctorInfor !== this.props.allRequiredDoctorInfor) {
-            let { resPayment, resPrice, resProvince } = this.props.allRequiredDoctorInfor;
+            let { resPayment, resPrice, resProvince, resSpecialty } = this.props.allRequiredDoctorInfor;
 
             let dataSelectPayment = this.buildDataInputSelect(resPayment, 'PAYMENT')
             let dataSelectPrice = this.buildDataInputSelect(resPrice, 'PRICE')
             let dataSelectProvince = this.buildDataInputSelect(resProvince, 'PROVINCE')
+            let dataSelectSpecialty = this.buildDataInputSelect(resSpecialty, 'SPECIALTY')
 
             this.setState({
                 listPayment: dataSelectPayment,
                 listPrice: dataSelectPrice,
-                listProvince: dataSelectProvince
+                listProvince: dataSelectProvince,
+                listSpecialty: dataSelectSpecialty
             })
         }
 
@@ -151,7 +171,9 @@ class TableManageUser extends Component {
             selectedProvince: this.state.selectedProvince.value,
             nameClinic: this.state.nameClinic,
             addressClinic: this.state.addressClinic,
-            note: this.state.note
+            note: this.state.note,
+            clinicId: this.state.selectedClinic && this.state.selectedClinic.value ? this.state.selectedClinic.value : '',
+            specialtyId: this.state.selectedSpecialty.value
         })
     }
 
@@ -233,8 +255,7 @@ class TableManageUser extends Component {
     }
 
     render() {
-        let { hasOldData } = this.state
-        console.log('check state now:', this.state)
+        let { hasOldData, listSpecialty } = this.state
         return (
             <div className='manage-doctor-container'>
                 <div className='manage-doctor-title'>
@@ -310,6 +331,29 @@ class TableManageUser extends Component {
                         <input className='form-control'
                             onChange={(event) => this.handleOnChangeText(event, 'note')}
                             value={this.state.note}
+                        />
+                    </div>
+                </div>
+
+                <div className='row'>
+                    <div className='col-4 form-group'>
+                        <label>Chon chuyen khoa</label>
+                        <Select
+                            value={this.state.selectedSpecialty}
+                            onChange={this.handleChangeSelectDoctorInfor}
+                            name="selectedSpecialty"
+                            options={this.state.listSpecialty}
+                            placeholder={'Chọn bác sĩ'}
+                        />
+                    </div>
+                    <div className='col-4 form-group'>
+                        <label>Chon phong kham</label>
+                        <Select
+                            value={this.state.selectedClinic}
+                            onChange={this.handleChangeSelectDoctorInfor}
+                            name="selectedClinic"
+                            options={this.state.listClinic}
+                            placeholder={'Chọn bác sĩ'}
                         />
                     </div>
                 </div>
